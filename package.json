@@ -1,0 +1,11 @@
+{
+  "name": "squad-mobile",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "",
+    "android": "cordova build android && cordova run android",
+    "ios": "cordova build ios && cordova run ios"
+  },
+  "author": "Clement Hoang"
+}
