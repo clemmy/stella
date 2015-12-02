@@ -39,7 +39,7 @@ npm run prepare-android
 npm run prepare-ios
 ```
 
-### Inside the reapp-squad directory
+### Inside the root directory
 ```
 # Builds and runs Android app
 npm run android
