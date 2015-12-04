@@ -2,9 +2,7 @@
   "name": "SquadMobile",
   "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "start": "react-native start"
-  },
+  "scripts": {},
   "dependencies": {
     "react-native": "^0.15.0"
   },
