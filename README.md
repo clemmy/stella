@@ -9,46 +9,38 @@
 
 ## Installation
 
+### Install the react-native cli
 ```sh
-cd reapp-squad && npm install
+npm install -g react-native-cli
+```
+
+### Then, install local dependencies (note: node v5 is recommended)
+```sh
+npm install
 ```
 
 ## Dependencies
 
 Make sure you have the following external dependencies installed. These will not be installed via the npm package manager.
 
-- SDK Platform for android-22
-- Android SDK Platform-tools
-- Android SDK Build-tools
+- Android SDK Build-tools version 23.0.1
+- Android 6.0 (API 23) SDK Platform
+- Android Support Repository
+- XCode 7.0+
+
+For Android installation, refer to [this guide](https://facebook.github.io/react-native/docs/android-setup.html).
 
 ## Development
 
-### Inside the reapp-squad directory
-```
-# Start the web interface on localhost:3010
-npm run start
-```
-
-```
-# Prepares Android files for building in Cordova
-npm run prepare-android
-```
-
-```
-# Prepares iOS files for building in Cordova
-npm run prepare-ios
-```
-
-### Inside the root directory
 ```
 # Builds and runs Android app
-npm run android
+react-native run-android
 ```
 _NOTE: This script assumes a physical device or Genymotion is used. In order to run it on the emulator provided with the Android SDK, use ```cordova emulate android```_
 
 ```
-# Builds and runs iOS app
-npm run ios
+# Opens the project with XCode, with which you can build and run
+open ios/SquadMobile.xcodeproj
 ```
 
 ## Testing
