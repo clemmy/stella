@@ -43,6 +43,11 @@ _NOTE: This script assumes a physical device or Genymotion is used. In order to 
 open ios/SquadMobile.xcodeproj
 ```
 
+```
+# Lint the code using eslint
+npm run lint
+```
+
 ## Testing
 
 *TODO*
