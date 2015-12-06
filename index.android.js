@@ -1,19 +1,16 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react-native';
+
+let {
   AppRegistry,
   StyleSheet,
   Text,
   View,
 } = React;
 
-var SquadMobile = React.createClass({
-  render: function() {
+class SquadMobile {
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -28,9 +25,9 @@ var SquadMobile = React.createClass({
       </View>
     );
   }
-});
+}
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
