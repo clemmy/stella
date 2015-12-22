@@ -35,15 +35,28 @@ export default class SquadHome extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight style={styles.button} onPress={this.goToPolls.bind(this)}>
-          <Text>Polls</Text>
+
+        <TouchableHighlight 
+          style={[styles.baseButton, styles.pollButton]} 
+          onPress={this.goToPolls.bind(this)}
+        >
+          <Text style={styles.buttonText}>Polls</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.goToLists.bind(this)}>
-          <Text>Lists</Text>
+
+        <TouchableHighlight 
+          style={[styles.baseButton, styles.listButton]}
+          onPress={this.goToLists.bind(this)}
+        >
+          <Text style={styles.buttonText}>Lists</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.goToEvents.bind(this)}>
-          <Text>Events</Text>
+
+        <TouchableHighlight 
+          style={[styles.baseButton, styles.eventButton]}
+          onPress={this.goToEvents.bind(this)}
+        >
+          <Text style={styles.buttonText}>Events</Text>
         </TouchableHighlight>
+
       </View>
     );
   }
@@ -53,13 +66,24 @@ export default class SquadHome extends React.Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+     marginTop: 40
   },
-  button: {
+  buttonText: {
+    fontSize: 24
+  },
+  baseButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  pollButton: {
+    backgroundColor: '#e74c3c',
+  },
+  listButton: {
+    backgroundColor: '#f1c40f',
+  },
+  eventButton: {
+    backgroundColor: '#2ecc71',
+  },
 })
 
