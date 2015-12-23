@@ -24,7 +24,7 @@ export default class SquadPolls extends React.Component {
       <ListView
         dataSource={this.state.polls}
         renderRow={(rowData) => {
-          return (<PollItem item={rowData} />)
+          return (<PollItem navigator={this.props.navigator} item={rowData} />)
         }}
       />
     )
