@@ -9,7 +9,7 @@ let {
   View,
 } = React;
 
-class SquadMobile {
+class SquadMobile extends React.Component {
   render() {
     return (
       <View style={styles.container}>
