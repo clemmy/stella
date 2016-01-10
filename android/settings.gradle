@@ -1,3 +1,3 @@
-rootProject.name = 'SquadMobile'
+rootProject.name = 'stella'
 
 include ':app'
