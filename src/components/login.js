@@ -1,6 +1,48 @@
 'use strict';
 
-import React, { Component, View, Text, TouchableHighlight } from 'react-native';
+import React, { StyleSheet, Component, View, Text, TouchableHighlight } from 'react-native';
+import t from 'tcomb-form-native';
+let Form = t.form.Form;
+
+let User = t.struct({
+  email: t.String,
+  password: t.String
+});
+let options = {
+  fields: {
+    email: {
+      label: 'Email',
+      error: 'Must be a valid email address'
+    },
+    password: {
+      label: 'Password',
+      password: true
+    }
+  }
+};
+let styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    marginTop: 50,
+    padding: 20,
+    backgroundColor: '#ffffff',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  }
+});
 
 class Login extends Component {
   constructor(props) {
@@ -8,7 +50,10 @@ class Login extends Component {
   }
 
   onLoginPress(event) {
-    console.log(this.props);
+    var value = this.refs.form.getValue();
+    console.log(value);
+
+    // switch to home if successful
     this.props.navigator.push({
       name: 'home'
     });
@@ -18,12 +63,14 @@ class Login extends Component {
     const { state, dispatch } = this.props;
 
     return (
-      <View>
-        <Text>
-          Initial login view???
-        </Text>
-        <TouchableHighlight onPress={this.onLoginPress.bind(this)}>
-          <Text>ray's butt</Text>
+      <View style={styles.container}>
+        <Form
+          ref="form"
+          type={User}
+          options={options}
+        />
+        <TouchableHighlight onPress={this.onLoginPress.bind(this)} style={styles.button} underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>Log in</Text>
         </TouchableHighlight>
       </View>
     );
