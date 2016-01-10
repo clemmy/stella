@@ -1,6 +1,8 @@
 'use strict';
 
 import React, { StyleSheet, TouchableHighlight, Component, View, Text } from 'react-native';
+import { setRoute } from '../actions';
+import { connect } from 'react-redux/native';
 
 let styles = StyleSheet.create({
   container: {
@@ -20,12 +22,14 @@ let styles = StyleSheet.create({
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.dispatch = this.props.dispatch;
   }
 
   goToPolls(event) {
     this.props.navigator.push({
       name: 'polls'
     });
+    this.dispatch(setRoute('polls'));
   }
 
   goToLists(event) {
@@ -83,4 +87,8 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect((state) => {
+  return {
+    route: state.route
+  };
+})(Home);

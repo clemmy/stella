@@ -1,7 +1,7 @@
+import route from './route.reducer.js';
+
 const reducers = {
-  dummy: function dummy(state = {}, action) {
-    return state
-  }
-};
+  route
+}
 
 export default reducers;

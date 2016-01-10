@@ -1,6 +1,8 @@
 'use strict';
 
 import React, { StyleSheet, Component, View, Text, TouchableHighlight } from 'react-native';
+import { setRoute } from '../actions';
+import { connect } from 'react-redux/native';
 import t from 'tcomb-form-native';
 let Form = t.form.Form;
 
@@ -53,10 +55,12 @@ class Login extends Component {
     var value = this.refs.form.getValue();
     console.log(value);
 
+    let { dispatch } = this.props;
     // switch to home if successful
     this.props.navigator.push({
       name: 'home'
     });
+    dispatch(setRoute('home'));
   }
 
   render() {
@@ -77,4 +81,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect((state) => {
+  return {
+    route: state.route
+  };
+})(Login);
