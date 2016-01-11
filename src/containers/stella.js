@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
 import Login from '../components/login';
 import Home from '../components/home';
-import Polls from '../components/polls';
+import Polls from '../components/polls/polls';
 import Navbar from '../components/navbar';
 import _ from 'lodash';
 import { setRoute } from '../actions';
@@ -64,7 +64,6 @@ class Stella extends Component {
 }
 
 export default connect((state) => {
-  console.log(state);
   return {
     route: state.route
   };
