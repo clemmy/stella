@@ -13,11 +13,13 @@ let ListPreview = React.createClass({
         <Image
           source={require('./')}
         />
-      <Text>{this.props.title}</Text>
-      <Text>{this.props.items[0].text}</Text>
-      <Text>{this.props.items[1].text}</Text>
-      <Text>{this.props.items[2].text}</Text>
+        <Text>{this.props.title}</Text>
+        <Text>{this.props.items[0].text}</Text>
+        <Text>{this.props.items[1].text}</Text>
+        <Text>{this.props.items[2].text}</Text>
       </View>
     );
   }
 });
+
+export default ListPreview;
