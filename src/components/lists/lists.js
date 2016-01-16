@@ -8,7 +8,7 @@ let {
   ListView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TouchableHighlight,
   View
 } = React;
 
@@ -40,6 +40,32 @@ let MOCKDATA = [
         text: 'List #2 - Item #3'
       }
     ]
+  },
+  { // LISTS INSTANCE
+    title: 'Shopping',
+    items: [
+      { // ITEM INSTANCE
+        text: 'Eggs'
+      },
+      { // ITEM INSTANCE
+        text: 'Bread'
+      },
+      { // ITEM INSTANCE
+        text: 'Milk'
+      },
+      { // ITEM INSTANCE
+        text: 'Butter'
+      },
+      { // ITEM INSTANCE
+        text: 'Apples'
+      },
+      { // ITEM INSTANCE
+        text: 'Orange Juice'
+      },
+      { // ITEM INSTANCE
+        text: 'Peas'
+      },
+    ]
   }
 ];
 
@@ -53,15 +79,25 @@ let styles = StyleSheet.create({
   },
   headerText: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   listViewWrapper: {
-    flex: 19,
-    justifyContent: 'space-around'
+    flex: 19
   },
   rowWrapper: {
-
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  rowImageWrapper: {
+    flex: 2
+  },
+  rowContentWrapper: {
+    flex: 5
+  },
+  rowTitle: {
+    fontWeight: 'bold'
   }
 });
 
@@ -91,14 +127,20 @@ let Lists = React.createClass({
 
   _renderRow: function(rowData) {
     return (
-      <TouchableOpacity
+      <TouchableHighlight
+        underlayColor="grey"
         onPress={this._onPressRow}
       >
         <View style={[styles.rowWrapper, border('green')]}>
-          <Text>{rowData.title}</Text>
-          <Text>Number of items: {rowData.items.length}</Text>
+          <View style={[styles.rowImageWrapper, border('purple')]}>
+            <Text>Image here</Text>
+          </View>
+          <View style={[styles.rowContentWrapper, border('brown')]}>
+            <Text style={styles.rowTitle}>{rowData.title}</Text>
+            <Text>Number of items: {rowData.items.length}</Text>
+          </View>
         </View>
-      </TouchableOpacity>
+      </TouchableHighlight>
     );
   },
 
