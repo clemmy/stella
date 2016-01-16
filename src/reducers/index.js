@@ -1,7 +1,9 @@
 import route from './route.reducer.js';
+import polls from './polls.reducer.js';
 
 const reducers = {
-  route
-}
+  route,
+  polls
+};
 
 export default reducers;

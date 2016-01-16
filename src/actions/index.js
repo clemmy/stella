@@ -1,6 +1,7 @@
 'use strict';
 
 export const SET_ROUTE = 'SET_ROUTE';
+export const ADD_POLL = 'ADD_POLL';
 
 export function setRoute(route) {
   return {
@@ -8,3 +9,10 @@ export function setRoute(route) {
     route
   };
 };
+
+export function addPoll(poll) {
+  return {
+    type: ADD_POLL,
+    poll
+  };
+}
