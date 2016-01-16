@@ -11,6 +11,7 @@ let {
   TouchableHighlight,
   View
 } = React;
+import { setRoute } from '../../actions';
 
 let MOCKDATA = [
   { // LISTS INSTANCE
@@ -70,7 +71,7 @@ let MOCKDATA = [
 ];
 
 /*
- * StyleSheet
+ * Styling
  */
 let styles = StyleSheet.create({
   container: {
@@ -129,7 +130,7 @@ let Lists = React.createClass({
     return (
       <TouchableHighlight
         underlayColor="grey"
-        onPress={this._onPressRow}
+        onPress={this._goToListDetails.bind(this, rowData)}
       >
         <View style={[styles.rowWrapper, border('green')]}>
           <View style={[styles.rowImageWrapper, border('purple')]}>
@@ -144,8 +145,16 @@ let Lists = React.createClass({
     );
   },
 
-  _onPressRow: function() {
+  _goToListDetails(listDetails, event) {
+    this.props.navigator.push({
+      name: 'listDetails',
+      listDetails: listDetails
+    });
+    this.dispatch(setRoute('listDetails'))
+  },
 
+  dispatch: function() {
+    this.props.dispatch;
   }
 });
 
