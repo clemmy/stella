@@ -7,13 +7,15 @@ import Login from '../components/login';
 import Home from '../components/home';
 import Polls from '../components/polls/polls';
 import Navbar from '../components/navbar';
+import CreatePollForm from '../components/polls/createPollForm';
 import _ from 'lodash';
 import { setRoute } from '../actions';
 
 const routes = {
   login: Login,
   home: Home,
-  polls: Polls
+  polls: Polls,
+  createPollForm: CreatePollForm
 };
 
 const routesToHideNavBarFor = ['login'];
