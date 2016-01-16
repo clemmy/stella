@@ -5,7 +5,7 @@ let {
   View
 } = React;
 
-let ListsItem = React.createClass({
+let ListItem = React.createClass({
   getInitialState: function() {
     return {
       text: this.props.text
@@ -33,4 +33,4 @@ let ListsItem = React.createClass({
   }
 });
 
-module.exports = ListsItem;
+export default ListItem;
