@@ -63,6 +63,7 @@ let ListDetails = React.createClass({
   _renderRow: function(rowData) {
     return (
       <View style={[styles.rowWrapper, border('green')]}>
+
         <Text>{rowData.text}</Text>
       </View>
     );
