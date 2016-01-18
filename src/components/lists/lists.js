@@ -80,11 +80,11 @@ let styles = StyleSheet.create({
   },
   headerText: {
     flex: 1,
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
   },
   listViewWrapper: {
-    flex: 19
+    flex: 17
   },
   rowWrapper: {
     flex: 1,
@@ -98,6 +98,19 @@ let styles = StyleSheet.create({
     flex: 5
   },
   rowTitle: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  rowText: {
+    fontSize: 18
+  },
+  addButtonWrapper: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  addButtonText: {
+    fontSize: 48,
     fontWeight: 'bold'
   }
 });
@@ -109,6 +122,7 @@ let Lists = React.createClass({
   getInitialState: function() {
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
+      lists: MOCKDATA,
       dataSource: ds.cloneWithRows(MOCKDATA)
     }
   },
@@ -122,6 +136,7 @@ let Lists = React.createClass({
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
         />
+      {this._addButton()}
       </View>
     );
   },
@@ -138,11 +153,36 @@ let Lists = React.createClass({
           </View>
           <View style={[styles.rowContentWrapper, border('brown')]}>
             <Text style={styles.rowTitle}>{rowData.title}</Text>
-            <Text>Number of items: {rowData.items.length}</Text>
+            <Text style={styles.rowText}>Number of items: {rowData.items.length}</Text>
           </View>
         </View>
       </TouchableHighlight>
     );
+  },
+
+  _addButton: function() {
+    return (
+      <View style={[styles.addButtonWrapper, border('purple')]}>
+        <Text
+          style={[styles.addButtonText]}
+          onPress={this._handleAddPress}
+        >
+          +
+        </Text>
+      </View>
+    );
+  },
+
+  _handleAddPress: function() {
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    let newLists = this.state.lists.concat([{
+      title: 'New List',
+      items: [{text: 'Placeholder'}]
+    }]);
+    this.setState({
+      lists: newLists,
+      dataSource: ds.cloneWithRows(newLists)
+    });
   },
 
   _goToListDetails(listDetails, event) {

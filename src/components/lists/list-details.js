@@ -8,6 +8,7 @@ let {
   ListView,
   StyleSheet,
   Text,
+  TextInput,
   View
 } = React;
 
@@ -21,16 +22,28 @@ let styles = StyleSheet.create({
   },
   headerText: {
     flex: 1,
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
   },
   listViewWrapper: {
-    flex: 19
+    flex: 17
   },
   rowWrapper: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  rowText: {
+    fontSize: 18
+  },
+  addButtonWrapper: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  addButtonText: {
+    fontSize: 48,
+    fontWeight: 'bold'
   }
 });
 
@@ -43,6 +56,7 @@ let ListDetails = React.createClass({
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
       title: listDetails.title,
+      items: listDetails.items,
       dataSource: ds.cloneWithRows(listDetails.items)
     }
   },
@@ -50,12 +64,17 @@ let ListDetails = React.createClass({
   render: function() {
     return (
       <View style={[styles.container, border('yellow')]}>
-        <Text style={[styles.headerText, border('blue')]}>{this.state.title}</Text>
+        <TextInput
+          style={[styles.headerText, border('blue')]}
+          onChange={(text) => this.setState({text})}
+          value={this.state.title}
+        />
         <ListView
           style={[styles.listViewWrapper, border('red')]}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
         />
+      {this._addButton()}
       </View>
     );
   },
@@ -63,11 +82,34 @@ let ListDetails = React.createClass({
   _renderRow: function(rowData) {
     return (
       <View style={[styles.rowWrapper, border('green')]}>
-
-        <Text>{rowData.text}</Text>
+        <Text style={styles.rowText}>{rowData.text}</Text>
       </View>
     );
-  }
+  },
+
+  _addButton: function() {
+    return (
+      <View style={[styles.addButtonWrapper, border('purple')]}>
+        <Text
+          style={[styles.addButtonText]}
+          onPress={this._handleAddPress}
+        >
+          +
+        </Text>
+      </View>
+    );
+  },
+
+  _handleAddPress: function() {
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    let newItems = this.state.items.concat([{
+      text: 'New item'
+    }]);
+    this.setState({
+      items: newItems,
+      dataSource: ds.cloneWithRows(newItems)
+    });
+  },
 });
 
 let border = function(color: string) {
