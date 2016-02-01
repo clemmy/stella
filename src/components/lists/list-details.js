@@ -3,14 +3,14 @@
 /*
  * Imports
  */
-let React = require('react-native');
-let {
+import React, {
+  Component,
   ListView,
   StyleSheet,
   Text,
   TextInput,
   View
-} = React;
+} from 'react-native';
 
 /*
  * Styling
@@ -50,18 +50,20 @@ let styles = StyleSheet.create({
 /*
  * Class declaration
  */
-let ListDetails = React.createClass({
-  getInitialState: function() {
+export default class ListDetails extends Component {
+  constructor(props) {
+    super(props);
+
     let listDetails = this.props.route.listDetails;
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    return {
+    this.state = {
       title: listDetails.title,
       items: listDetails.items,
       dataSource: ds.cloneWithRows(listDetails.items)
-    }
-  },
+    };
+  }
 
-  render: function() {
+  render() {
     return (
       <View style={[styles.container, border('yellow')]}>
         <TextInput
@@ -72,35 +74,35 @@ let ListDetails = React.createClass({
         <ListView
           style={[styles.listViewWrapper, border('red')]}
           dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
+          renderRow={this.renderRow.bind(this)}
         />
-      {this._addButton()}
+      {this.addButton()}
       </View>
     );
-  },
+  }
 
-  _renderRow: function(rowData) {
+  renderRow(rowData) {
     return (
       <View style={[styles.rowWrapper, border('green')]}>
         <Text style={styles.rowText}>{rowData.text}</Text>
       </View>
     );
-  },
+  }
 
-  _addButton: function() {
+  addButton() {
     return (
       <View style={[styles.addButtonWrapper, border('purple')]}>
         <Text
           style={[styles.addButtonText]}
-          onPress={this._handleAddPress}
+          onPress={this.handleAddPress.bind(this)}
         >
           +
         </Text>
       </View>
     );
-  },
+  }
 
-  _handleAddPress: function() {
+  handleAddPress() {
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let newItems = this.state.items.concat([{
       text: 'New item'
@@ -109,17 +111,12 @@ let ListDetails = React.createClass({
       items: newItems,
       dataSource: ds.cloneWithRows(newItems)
     });
-  },
-});
+  }
+}
 
-let border = function(color: string) {
+let border = (color: string) => {
   return {
     borderColor: color,
     borderWidth: 4
   }
 }
-
-/*
- * Export
- */
-export default ListDetails;

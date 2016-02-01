@@ -3,14 +3,15 @@
 /*
  * Imports
  */
-let React = require('react-native');
-let {
+import React, {
+  Component,
   ListView,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
-} = React;
+} from 'react-native';
+
 import { setRoute } from '../../actions';
 
 let MOCKDATA = [
@@ -118,34 +119,36 @@ let styles = StyleSheet.create({
 /*
  * Class declaration
  */
-let Lists = React.createClass({
-  getInitialState: function() {
+export default class Lists extends Component {
+  constructor(props) {
+    super(props);
+
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    return {
+    this.state = {
       lists: MOCKDATA,
       dataSource: ds.cloneWithRows(MOCKDATA)
-    }
-  },
+    };
+  }
 
-  render: function() {
+  render() {
     return (
       <View style={[styles.container, border('yellow')]}>
         <Text style={[styles.headerText, border('blue')]}>Lists</Text>
         <ListView
           style={[styles.listViewWrapper, border('red')]}
           dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
+          renderRow={this.renderRow.bind(this)}
         />
-      {this._addButton()}
+      {this.addButton()}
       </View>
     );
-  },
+  }
 
-  _renderRow: function(rowData) {
+  renderRow(rowData) {
     return (
       <TouchableHighlight
         underlayColor="grey"
-        onPress={this._goToListDetails.bind(this, rowData)}
+        onPress={this.goToListDetails.bind(this, rowData)}
       >
         <View style={[styles.rowWrapper, border('green')]}>
           <View style={[styles.rowImageWrapper, border('purple')]}>
@@ -158,22 +161,22 @@ let Lists = React.createClass({
         </View>
       </TouchableHighlight>
     );
-  },
+  }
 
-  _addButton: function() {
+  addButton() {
     return (
       <View style={[styles.addButtonWrapper, border('purple')]}>
         <Text
           style={[styles.addButtonText]}
-          onPress={this._handleAddPress}
+          onPress={this.handleAddPress.bind(this)}
         >
           +
         </Text>
       </View>
     );
-  },
+  }
 
-  _handleAddPress: function() {
+  handleAddPress() {
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let newLists = this.state.lists.concat([{
       title: 'New List',
@@ -183,22 +186,22 @@ let Lists = React.createClass({
       lists: newLists,
       dataSource: ds.cloneWithRows(newLists)
     });
-  },
+  }
 
-  _goToListDetails(listDetails, event) {
+  goToListDetails(listDetails, event) {
     this.props.navigator.push({
       name: 'listDetails',
       listDetails: listDetails
     });
     this.dispatch(setRoute('listDetails'))
-  },
+  }
 
-  dispatch: function() {
+  dispatch() {
     this.props.dispatch;
   }
-});
+}
 
-let border = function(color: string) {
+let border = (color: string) => {
   return {
     borderColor: color,
     borderWidth: 4
