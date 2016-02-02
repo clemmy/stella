@@ -50,7 +50,7 @@ let styles = StyleSheet.create({
 /*
  * Class declaration
  */
-export default class ListDetails extends Component {
+class ListDetails extends Component {
   constructor(props) {
     super(props);
 
@@ -61,6 +61,9 @@ export default class ListDetails extends Component {
       items: listDetails.items,
       dataSource: ds.cloneWithRows(listDetails.items)
     };
+
+    this.renderRow = this.renderRow.bind(this);
+    this.handleAddPress = this.handleAddPress.bind(this);
   }
 
   render() {
@@ -74,7 +77,7 @@ export default class ListDetails extends Component {
         <ListView
           style={[styles.listViewWrapper, border('red')]}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
+          renderRow={this.renderRow}
         />
       {this.addButton()}
       </View>
@@ -94,7 +97,7 @@ export default class ListDetails extends Component {
       <View style={[styles.addButtonWrapper, border('purple')]}>
         <Text
           style={[styles.addButtonText]}
-          onPress={this.handleAddPress.bind(this)}
+          onPress={this.handleAddPress}
         >
           +
         </Text>
@@ -114,9 +117,14 @@ export default class ListDetails extends Component {
   }
 }
 
-let border = (color: string) => {
+function border(color: string) {
   return {
     borderColor: color,
     borderWidth: 4
-  }
+  };
 }
+
+/*
+ * Export class
+ */
+export default ListDetails;
