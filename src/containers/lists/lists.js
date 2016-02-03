@@ -11,65 +11,10 @@ import React, {
   TouchableHighlight,
   View
 } from 'react-native';
+import { connect } from 'react-redux/native';
+import { bindActionCreators } from 'redux';
 
-import { setRoute } from '../../actions';
-
-let MOCKDATA = [
-  { // LISTS INSTANCE
-    title: 'List #1',
-    items: [
-      { // ITEM INSTANCE
-        text: 'List #1 - Item #1'
-      },
-      { // ITEM INSTANCE
-        text: 'List #1 - Item #2'
-      },
-      { // ITEM INSTANCE
-        text: 'List #1 - Item #3'
-      }
-    ]
-  },
-  { // LISTS INSTANCE
-    title: 'List #2',
-    items: [
-      { // ITEM INSTANCE
-        text: 'List #2 - Item #1'
-      },
-      { // ITEM INSTANCE
-        text: 'List #2 - Item #2'
-      },
-      { // ITEM INSTANCE
-        text: 'List #2 - Item #3'
-      }
-    ]
-  },
-  { // LISTS INSTANCE
-    title: 'Shopping',
-    items: [
-      { // ITEM INSTANCE
-        text: 'Eggs'
-      },
-      { // ITEM INSTANCE
-        text: 'Bread'
-      },
-      { // ITEM INSTANCE
-        text: 'Milk'
-      },
-      { // ITEM INSTANCE
-        text: 'Butter'
-      },
-      { // ITEM INSTANCE
-        text: 'Apples'
-      },
-      { // ITEM INSTANCE
-        text: 'Orange Juice'
-      },
-      { // ITEM INSTANCE
-        text: 'Peas'
-      },
-    ]
-  }
-];
+import { fetchLists, createList, deleteList, setRoute } from '../../actions';
 
 /*
  * Styling
@@ -93,10 +38,10 @@ let styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   rowImageWrapper: {
-    flex: 2
+    flex: 4
   },
   rowContentWrapper: {
-    flex: 5
+    flex: 10
   },
   rowTitle: {
     fontSize: 18,
@@ -104,6 +49,15 @@ let styles = StyleSheet.create({
   },
   rowText: {
     fontSize: 18
+  },
+  rowDeleteWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  rowDeleteText: {
+    fontSize: 18,
+    fontWeight: 'bold'
   },
   addButtonWrapper: {
     flex: 2,
@@ -125,12 +79,26 @@ class Lists extends Component {
 
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      lists: MOCKDATA,
-      dataSource: ds.cloneWithRows(MOCKDATA)
+      lists: [],
+      dataSource: ds.cloneWithRows([])
     };
 
     this.renderRow = this.renderRow.bind(this);
+    this.handleRefreshPress = this.handleRefreshPress.bind(this);
     this.handleAddPress = this.handleAddPress.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.fetchLists(1);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('List received new props:', nextProps);
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.setState({
+      lists: nextProps.lists,
+      dataSource: ds.cloneWithRows(nextProps.lists)
+    });
   }
 
   render() {
@@ -142,6 +110,7 @@ class Lists extends Component {
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
         />
+      {this.refreshButton()}
       {this.addButton()}
       </View>
     );
@@ -154,16 +123,48 @@ class Lists extends Component {
         onPress={this.goToListDetails.bind(this, rowData)}
       >
         <View style={[styles.rowWrapper, border('green')]}>
+
           <View style={[styles.rowImageWrapper, border('purple')]}>
             <Text>Image here</Text>
           </View>
+
           <View style={[styles.rowContentWrapper, border('brown')]}>
             <Text style={styles.rowTitle}>{rowData.title}</Text>
-            <Text style={styles.rowText}>Number of items: {rowData.items.length}</Text>
+            <Text style={styles.rowText}>Number of items: {rowData.listItems.length}</Text>
           </View>
+
+          <TouchableHighlight
+            underlayColor="grey"
+            onPress={this.handleDeletePress.bind(this, rowData.id)}
+            style={[styles.rowDeleteWrapper, border('blue')]}
+          >
+            <View style={[styles.rowDeleteWrapper, border('red')]}>
+              <Text style={[styles.rowDeleteText]}>
+                X
+              </Text>
+            </View>
+          </TouchableHighlight>
+
         </View>
       </TouchableHighlight>
     );
+  }
+
+  refreshButton() {
+    return (
+      <View style={[styles.addButtonWrapper, border('purple')]}>
+        <Text
+          style={[styles.addButtonText]}
+          onPress={this.handleRefreshPress}
+        >
+          REFRESH
+        </Text>
+      </View>
+    );
+  }
+
+  handleRefreshPress() {
+    this.props.fetchLists(1);
   }
 
   addButton() {
@@ -180,15 +181,11 @@ class Lists extends Component {
   }
 
   handleAddPress() {
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let newLists = this.state.lists.concat([{
-      title: 'New List',
-      items: [{text: 'Placeholder'}]
-    }]);
-    this.setState({
-      lists: newLists,
-      dataSource: ds.cloneWithRows(newLists)
-    });
+    this.props.createList(2, 1);
+  }
+
+  handleDeletePress(id, event) {
+    this.props.deleteList(id);
   }
 
   goToListDetails(listDetails, event) {
@@ -196,12 +193,16 @@ class Lists extends Component {
       name: 'listDetails',
       listDetails: listDetails
     });
-    this.dispatch(setRoute('listDetails'));
+    this.props.setRoute('listDetails');
   }
+}
 
-  dispatch() {
-    this.props.dispatch;
-  }
+function mapStateToProps({ lists }) {
+  return { lists };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchLists, createList, deleteList, setRoute }, dispatch);
 }
 
 function border(color: string) {
@@ -214,4 +215,28 @@ function border(color: string) {
 /*
  * Export class
  */
-export default Lists;
+export default connect(mapStateToProps, mapDispatchToProps)(Lists);
+
+/**
+ * List model
+ {
+   id        : Integer,
+   title     : String,
+   createdAt : Date,
+   updatedAt : Date,
+   isActive  : Boolean,
+   userId    : Integer,
+   SquadId   : Integer,
+   listItems : [
+     ...
+     {
+       text          : String,
+       createdAt     : Date,
+       updatedAt     : Date,
+       completed     : Boolean,
+       addedByUserId : Integer,
+     }
+     ...
+   ]
+ }
+*/

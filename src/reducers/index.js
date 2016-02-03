@@ -1,7 +1,9 @@
-import route from './route.reducer.js';
+import route from './route.reducer';
+import lists from './lists.reducer';
 
 const reducers = {
-  route
+  route,
+  lists
 }
 
 export default reducers;
