@@ -36,7 +36,7 @@ For Android installation, refer to [this guide](https://facebook.github.io/react
 # Builds and runs Android app
 react-native run-android
 ```
-_NOTE: This script assumes a physical device or Genymotion is used. In order to run it on the emulator provided with the Android SDK, use ```cordova emulate android```_
+_NOTE: This script assumes a physical device or Genymotion is used. In order to run it on the emulator provided with the Android SDK, use ```cordova emulate android```. For a physical device, remember to run ```adb reverse tcp:8081 tcp:8081``` first._
 
 ```
 # Opens the project with XCode, with which you can build and run
