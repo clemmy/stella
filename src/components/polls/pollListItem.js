@@ -27,16 +27,11 @@ class PollListItem extends Component {
     super(props);
   }
 
-  onPress() {
-    console.log('pressed');
-    console.log(this.props.poll);
-  }
-
   render() {
     const { state, dispatch } = this.props;
 
     return (
-      <TouchableHighlight onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+      <TouchableHighlight onPress={this.props.onPress} underlayColor='#99d9f4'>
         <View style={styles.container}>
           <Text style={styles.title} numberOfLines={1}>
             {this.props.poll.title}

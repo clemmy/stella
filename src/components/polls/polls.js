@@ -22,9 +22,12 @@ class Polls extends Component {
     };
   }
 
-  goToPoll(event) {
+  goToPoll(poll, event) {
     this.props.navigator.push({
-      name: 'pollDetail'
+      name: 'pollDetail',
+      props: {
+        poll: poll
+      }
     });
     this.props.dispatch(setRoute('pollDetail'));
   }
@@ -44,7 +47,7 @@ class Polls extends Component {
         <ListView
           dataSource={this.state.dataSource.cloneWithRows(this.props.polls.toJS())}
           renderRow={(rowData) => (
-            <PollListItem poll={rowData} />
+            <PollListItem poll={rowData} onPress={this.goToPoll.bind(this, rowData) } />
           )}
         />
         <TouchableHighlight onPress={this.goToCreatePollForm.bind(this)} style={[styles.button, {marginTop: 6}] } underlayColor='#99d9f4'>

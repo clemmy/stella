@@ -5,8 +5,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
 import Login from '../components/login';
 import Home from '../components/home';
-import Polls from '../components/polls/polls';
 import Navbar from '../components/navbar';
+import Polls from '../components/polls/polls';
+import PollDetail from '../components/polls/pollDetail';
 import CreatePollForm from '../components/polls/createPollForm';
 import _ from 'lodash';
 import { setRoute } from '../actions';
@@ -15,7 +16,8 @@ const routes = {
   login: Login,
   home: Home,
   polls: Polls,
-  createPollForm: CreatePollForm
+  createPollForm: CreatePollForm,
+  pollDetail: PollDetail
 };
 
 const routesToHideNavBarFor = ['login'];
@@ -31,6 +33,7 @@ class Stella extends Component {
     return <Component
       navigator={navigator}
       route={route}
+      { ...route.props }
       />;
   }
 

@@ -5,9 +5,12 @@ import React, { StyleSheet, TouchableHighlight, Component, View, Text } from 're
 let styles = StyleSheet.create({
 });
 
-class Poll extends Component {
+class PollDetail extends Component {
   constructor(props) {
     super(props);
+
+    console.log(props);
+    console.log(this.props);
   }
 
   render() {
@@ -17,10 +20,12 @@ class Poll extends Component {
       <View style={styles.container}>
         <Text>
           Poll VIEW
+          {this.props.poll.title}
+          {this.props.poll.author}
         </Text>
       </View>
     );
   }
 }
 
-export default Poll;
+export default PollDetail;
