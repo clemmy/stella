@@ -3,8 +3,14 @@
 import React, { StyleSheet, ListView, TouchableHighlight, Component, View, Text } from 'react-native';
 import { setRoute } from '../../actions';
 import { connect } from 'react-redux/native';
+import PollListItem from './pollListItem';
+import buttonStyles from '../../styles/button';
 
 let styles = StyleSheet.create({
+  ...buttonStyles,
+  container: {
+    padding: 8
+  }
 });
 
 class Polls extends Component {
@@ -37,10 +43,12 @@ class Polls extends Component {
       <View style={styles.container}>
         <ListView
           dataSource={this.state.dataSource.cloneWithRows(this.props.polls.toJS())}
-          renderRow={(rowData) => <Text>{rowData.title}</Text>}
+          renderRow={(rowData) => (
+            <PollListItem poll={rowData} />
+          )}
         />
-        <TouchableHighlight onPress={this.goToCreatePollForm.bind(this)}>
-          <Text>
+        <TouchableHighlight onPress={this.goToCreatePollForm.bind(this)} style={[styles.button, {marginTop: 6}] } underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>
             Add poll
           </Text>
         </TouchableHighlight>

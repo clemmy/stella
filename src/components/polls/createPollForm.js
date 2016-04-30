@@ -68,7 +68,8 @@ class CreatePollForm extends Component {
     let { dispatch } = this.props;
 
     let newPoll = _.assign({}, this.refs.form.getValue(), {
-      pollOptions: this.state.pollOptions.toIndexedSeq().filter((option) => !!option.value).toList()
+      pollOptions: this.state.pollOptions.toIndexedSeq().filter((option) => !!option.value).toList(),
+      author: this.props.user.get('email')
     });
 
     if (newPoll.pollOptions.size > 0) {
@@ -132,6 +133,7 @@ class CreatePollForm extends Component {
 
 export default connect((state) => {
   return {
-    route: state.route
+    route: state.route,
+    user: state.user
   };
 })(CreatePollForm);
