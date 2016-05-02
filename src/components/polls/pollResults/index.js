@@ -5,7 +5,7 @@ import React, { StyleSheet, TouchableHighlight, Component, View, Text } from 're
 let styles = StyleSheet.create({
 });
 
-class PollDetail extends Component {
+class PollResults extends Component {
   constructor(props) {
     super(props);
 
@@ -19,7 +19,7 @@ class PollDetail extends Component {
     return (
       <View style={styles.container}>
         <Text>
-          Poll VIEW
+          Poll results VIEW
           {this.props.poll.title}
           {this.props.poll.author}
         </Text>
@@ -28,4 +28,4 @@ class PollDetail extends Component {
   }
 }
 
-export default PollDetail;
+export default PollResults;

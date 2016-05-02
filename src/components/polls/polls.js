@@ -23,13 +23,14 @@ class Polls extends Component {
   }
 
   goToPoll(poll, event) {
+    //TODO: if poll.voters.contains(user), then go to pollResults
     this.props.navigator.push({
-      name: 'pollDetail',
+      name: 'pollVote',
       props: {
         poll: poll
       }
     });
-    this.props.dispatch(setRoute('pollDetail'));
+    this.props.dispatch(setRoute('pollVote'));
   }
 
   goToCreatePollForm(event) {

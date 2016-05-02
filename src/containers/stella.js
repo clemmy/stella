@@ -7,7 +7,8 @@ import Login from '../components/login';
 import Home from '../components/home';
 import Navbar from '../components/navbar';
 import Polls from '../components/polls/polls';
-import PollDetail from '../components/polls/pollDetail';
+import PollVote from '../components/polls/pollVote';
+import PollResults from '../components/polls/pollResults';
 import CreatePollForm from '../components/polls/createPollForm';
 import _ from 'lodash';
 import { setRoute } from '../actions';
@@ -17,7 +18,8 @@ const routes = {
   home: Home,
   polls: Polls,
   createPollForm: CreatePollForm,
-  pollDetail: PollDetail
+  pollVote: PollVote,
+  pollResults: PollResults
 };
 
 const routesToHideNavBarFor = ['login'];
