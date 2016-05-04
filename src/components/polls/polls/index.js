@@ -1,10 +1,10 @@
 'use strict';
 
 import React, { StyleSheet, ListView, TouchableHighlight, Component, View, Text } from 'react-native';
-import { setRoute } from '../../actions';
+import { setRoute } from '../../../actions';
 import { connect } from 'react-redux/native';
 import PollListItem from './pollListItem';
-import buttonStyles from '../../styles/button';
+import buttonStyles from '../../../styles/button';
 
 let styles = StyleSheet.create({
   ...buttonStyles,
