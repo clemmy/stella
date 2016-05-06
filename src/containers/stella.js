@@ -6,8 +6,8 @@ import { connect } from 'react-redux/native';
 import Login from '../components/login';
 import Home from '../components/home';
 import Polls from '../components/polls';
-import Lists from './lists/lists';
-import ListDetails from './lists/list-details'
+import Lists from '../components/lists/lists';
+import ListDetails from '../components/lists/list-details'
 import Navbar from '../components/navbar';
 import _ from 'lodash';
 import { setRoute } from '../actions';

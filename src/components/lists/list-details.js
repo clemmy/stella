@@ -58,8 +58,8 @@ class ListDetails extends Component {
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       title: listDetails.title,
-      items: listDetails.listItems,
-      dataSource: ds.cloneWithRows(listDetails.listItems)
+      items: listDetails.items,
+      dataSource: ds.cloneWithRows(listDetails.items)
     };
 
     this.renderRow = this.renderRow.bind(this);

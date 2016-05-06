@@ -6,9 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "axios": "^0.9.1",
     "immutable": "^3.7.6",
-    "isomorphic-fetch": "^2.2.1",
     "lodash": "^3.10.1",
     "react-native": "^0.17.0",
     "react-redux": "^3.1.2",
