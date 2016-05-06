@@ -3,6 +3,7 @@
 import React, { StyleSheet, Component, View, Text, TouchableHighlight } from 'react-native';
 import { setRoute, login } from '../actions';
 import { connect } from 'react-redux/native';
+import buttonStyles from '../styles/button';
 import t from 'tcomb-form-native';
 let Form = t.form.Form;
 
@@ -23,26 +24,12 @@ let options = {
   }
 };
 let styles = StyleSheet.create({
+  ...buttonStyles,
   container: {
     justifyContent: 'center',
     marginTop: 50,
     padding: 20,
     backgroundColor: '#ffffff',
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   }
 });
 

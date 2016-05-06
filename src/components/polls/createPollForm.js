@@ -6,6 +6,7 @@ import { connect } from 'react-redux/native';
 import t from 'tcomb-form-native';
 import _ from 'lodash';
 import { List } from 'immutable';
+import buttonStyles from '../../styles/button';
 import stylesheet from './../../../node_modules/tcomb-form-native/lib/stylesheets/bootstrap';
 let Form = t.form.Form;
 
@@ -21,27 +22,13 @@ let options = {
   }
 };
 let styles = StyleSheet.create({
+  ...buttonStyles,
   container: {
     justifyContent: 'center',
     marginTop: 50,
     padding: 20,
     backgroundColor: '#ffffff',
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  }
 });
 
 class CreatePollForm extends Component {
@@ -50,15 +37,12 @@ class CreatePollForm extends Component {
 
     this.state = {
       title: null,
-      pollOptions: List([
+      choices: List([
         {
-          value: null
+          text: null
         },
         {
-          value: null
-        },
-        {
-          value: null
+          text: null
         }
       ])
     };
@@ -68,11 +52,11 @@ class CreatePollForm extends Component {
     let { dispatch } = this.props;
 
     let newPoll = _.assign({}, this.refs.form.getValue(), {
-      pollOptions: this.state.pollOptions.toIndexedSeq().filter((option) => !!option.value).toList(),
+      choices: this.state.choices.toIndexedSeq().filter((choice) => !!choice.text).toList(),
       author: this.props.user.get('email')
     });
 
-    if (newPoll.pollOptions.size > 0) {
+    if (newPoll.choices.size > 0) {
       dispatch(addPoll(newPoll));
 
       this.props.navigator.pop();
@@ -84,7 +68,7 @@ class CreatePollForm extends Component {
 
   onAddOptionPress(event) {
     this.setState({
-      pollOptions: this.state.pollOptions.concat({ value: null })
+      choices: this.state.choices.concat({ text: null })
     });
   }
 
@@ -106,14 +90,14 @@ class CreatePollForm extends Component {
         />
 
         {
-          this.state.pollOptions.toIndexedSeq().map((option, index) => (
+          this.state.choices.toIndexedSeq().map((choice, index) => (
             <View key={'option' + index}>
               <TextInput
                 style={stylesheet.textbox.normal}
                 placeholder={'Option ' + (index + 1)}
                 onChangeText={(text) => {
                   this.setState({
-                    pollOptions: this.state.pollOptions.set(index, _.assign({}, option, { value: text }))
+                    choices: this.state.choices.set(index, _.assign({}, choice, { text: text }))
                   });
                 }}
               />

@@ -9,7 +9,7 @@ export default function polls(state = new List(), action) {
       let { poll } = action;
       let newPoll = {
         title: poll.title,
-        pollOptions: poll.pollOptions,
+        choices: poll.choices,
         author: poll.author
       };
 
