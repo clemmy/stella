@@ -40,7 +40,7 @@ _NOTE: This script assumes a physical device or Genymotion is used. In order to 
 
 ```
 # Opens the project with XCode, with which you can build and run
-open ios/SquadMobile.xcodeproj
+open ios/stella.xcodeproj
 ```
 
 ```
