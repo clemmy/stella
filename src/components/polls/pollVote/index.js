@@ -5,8 +5,19 @@ import { connect } from 'react-redux/native';
 import { setRoute } from '../../../actions';
 import Votable from './votable';
 import Immutable from 'immutable';
+import buttonStyles from '../../../styles/button';
 
 let styles = StyleSheet.create({
+  ...buttonStyles,
+  container: {
+    padding: 8
+  },
+  title: {
+    fontSize: 22
+  },
+  author: {
+    fontSize: 12
+  }
 });
 
 class PollVote extends Component {
@@ -22,7 +33,7 @@ class PollVote extends Component {
   }
 
   onChoiceSelected(choice, event) {
-    
+
   }
 
   goToResults() {
@@ -40,12 +51,12 @@ class PollVote extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>
-          Poll vote VIEW
-          {this.props.poll.title}
-          {this.props.poll.author}
+        <Text style={styles.author}>
+          {this.props.poll.author + ":"}
         </Text>
-
+        <Text style={styles.title}>
+          {this.props.poll.title}
+        </Text>
         <ListView
           dataSource={this.state.dataSource.cloneWithRows(this.props.poll.choices.toJS())}
           renderRow={(rowData) => (
@@ -53,8 +64,8 @@ class PollVote extends Component {
           )}
         />
 
-        <TouchableHighlight underlayColor='#99d9f4' onPress={this.goToResults.bind(this)}>
-          <Text>See results</Text>
+        <TouchableHighlight underlayColor='#99d9f4' onPress={this.goToResults.bind(this)} style={[styles.button, {marginTop: 6}]}>
+          <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
       </View>
     );

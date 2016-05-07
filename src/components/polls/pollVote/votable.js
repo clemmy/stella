@@ -4,7 +4,7 @@ import React, { StyleSheet, TouchableHighlight, Component, View, Text } from 're
 
 let styles = StyleSheet.create({
   container: {
-    height: 100,
+    height: 60,
     backgroundColor: 'white',
     borderColor: '#48BBEC',
     borderWidth: 1,
@@ -14,8 +14,7 @@ let styles = StyleSheet.create({
     padding: 6
   },
   text: {
-    fontSize: 20,
-    fontWeight: 'bold'
+    fontSize: 18
   }
 });
 
