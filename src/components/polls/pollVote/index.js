@@ -28,18 +28,22 @@ class PollVote extends Component {
     console.log(this.props);
 
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      selected: null
     };
   }
 
   onChoiceSelected(choice, event) {
-
+    this.setState({
+      selected: choice
+    });
   }
 
   goToResults() {
     this.props.navigator.push({
       name: 'pollResults',
       props: {
+        choice: this.state.selected,
         poll: this.props.poll
       }
     });
@@ -60,7 +64,7 @@ class PollVote extends Component {
         <ListView
           dataSource={this.state.dataSource.cloneWithRows(this.props.poll.choices.toJS())}
           renderRow={(rowData) => (
-            <Votable choice={rowData} onPress={this.onChoiceSelected.bind(this, rowData) } />
+            <Votable choice={rowData} onPress={this.onChoiceSelected.bind(this, rowData)} selected={rowData == this.state.selected} />
           )}
         />
 
