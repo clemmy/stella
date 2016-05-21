@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { StyleSheet, Component, View, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, Component, View, Text } from 'react-native';
 
 let styles = StyleSheet.create({
   container: {

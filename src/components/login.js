@@ -1,8 +1,9 @@
 'use strict';
 
-import React, { StyleSheet, Component, View, Text, TouchableHighlight } from 'react-native';
+import React from 'react';
+import { StyleSheet, Component, View, Text, TouchableHighlight } from 'react-native';
 import { setRoute, login } from '../actions';
-import { connect } from 'react-redux/native';
+import { connect } from 'react-redux';
 import buttonStyles from '../styles/button';
 import t from 'tcomb-form-native';
 let Form = t.form.Form;

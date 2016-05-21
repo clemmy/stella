@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { StyleSheet, TouchableHighlight, Component, View, Text, ListView } from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableHighlight, Component, View, Text, ListView } from 'react-native';
 import Immutable from 'immutable';
 import ChoiceBar from './choiceBar';
 

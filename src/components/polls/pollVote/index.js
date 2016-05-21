@@ -1,7 +1,8 @@
 'use strict';
 
-import React, { StyleSheet, TouchableHighlight, Component, View, Text, ListView } from 'react-native';
-import { connect } from 'react-redux/native';
+import React from 'react';
+import { StyleSheet, TouchableHighlight, Component, View, Text, ListView } from 'react-native';
+import { connect } from 'react-redux';
 import { setRoute } from '../../../actions';
 import Votable from './votable';
 import Immutable from 'immutable';

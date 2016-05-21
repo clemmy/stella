@@ -1,8 +1,9 @@
 'use strict';
 
-import React, { StyleSheet, Component, TextInput, View, Text, TouchableHighlight } from 'react-native';
+import React from 'react';
+import { StyleSheet, Component, TextInput, View, Text, TouchableHighlight } from 'react-native';
 import { setRoute, addPoll } from '../../actions';
-import { connect } from 'react-redux/native';
+import { connect } from 'react-redux';
 import t from 'tcomb-form-native';
 import _ from 'lodash';
 import { List } from 'immutable';
