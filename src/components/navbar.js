@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { StyleSheet, TouchableOpacity, TouchableHighlight, Component, View, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, TouchableHighlight, Component, View, Text } from 'react-native';
 
 const NAV_BAR_HEIGHT = 39;
 const STATUS_BAR_HEIGHT = 20;
