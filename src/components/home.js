@@ -1,8 +1,9 @@
 'use strict';
 
-import React, { StyleSheet, TouchableHighlight, Component, View, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableHighlight, Component, View, Text } from 'react-native';
 import { setRoute } from '../actions';
-import { connect } from 'react-redux/native';
+import { connect } from 'react-redux';
 
 let styles = StyleSheet.create({
   container: {
