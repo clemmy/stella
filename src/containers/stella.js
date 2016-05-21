@@ -1,8 +1,9 @@
 'use strict';
 
-import React, { BackAndroid, Navigator, Component, View, Text } from 'react-native';
+import React from 'react';
+import { BackAndroid, Navigator, Component, View, Text } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux/native';
+import { connect } from 'react-redux';
 import Login from '../components/login';
 import Home from '../components/home';
 import Polls from '../components/polls';
