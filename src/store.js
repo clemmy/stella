@@ -14,11 +14,10 @@ const logger = createLogger({
     let newState = {};
 
     for (let i of Object.keys(state)) {
-      if (Immutable.Iterable.isIterable(state[i])) {
-        newState[i] = state[i].toJS();
-      } else {
-        newState[i] = state[i];
-      }
+      newState[i] = {
+        original: state[i],
+        js: Immutable.Iterable.isIterable(state[i]) ? state[i].toJS() : state[i]
+      };
     };
 
     return newState;
