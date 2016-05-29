@@ -1,8 +1,11 @@
 'use strict';
 
+import _ from 'lodash';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import createLogger from 'redux-logger';
 import reducers from './reducers';
+import rootSaga from './sagas';
 import INITIAL_STATE from './constants/store';
 import Immutable from 'immutable';
 
@@ -19,9 +22,25 @@ const logger = createLogger({
     };
 
     return newState;
+  },
+  predicate: (getState, { type }) => {
+    return !_.contains(actionTypesToIgnore, type);
   }
 });
-const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
 
+const actionTypesToIgnore = [
+  'EFFECT_TRIGGERED',
+  'EFFECT_RESOLVED',
+  'EFFECT_REJECTED'
+];
+const sagaMiddleware = createSagaMiddleware();
+
+const middleware = [
+  sagaMiddleware,
+  logger // logger middleware must be last
+];
+const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 let store = createStoreWithMiddleware(combineReducers(reducers), INITIAL_STATE);
+sagaMiddleware.run(rootSaga);
+
 export default store;

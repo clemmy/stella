@@ -43,12 +43,7 @@ class Login extends Component {
     var loginInfo = this.refs.form.getValue();
 
     let { dispatch } = this.props;
-    // switch to home if successful
-    this.props.navigator.push({
-      name: 'home'
-    });
-    dispatch(setRoute('home'));
-    dispatch(login(loginInfo.email));
+    dispatch(login(loginInfo, this.props.navigator));
   }
 
   render() {
