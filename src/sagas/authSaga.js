@@ -2,6 +2,7 @@ import { takeEvery } from 'redux-saga';
 import { put, call } from 'redux-saga/effects';
 import { LOGIN, LOGOUT, setSessionInfo, setRoute } from '../actions';
 import { performReq } from '../utils';
+import config from '../../config.json';
 
 export function* watchAuthSaga() {
   yield [
@@ -11,7 +12,7 @@ export function* watchAuthSaga() {
 }
 
 export function* login(action) {
-  const url = 'http://10.0.0.35:8069/v1/login';
+  const url = `${config.MEGUMI_URL}/v1/login`;
 
   try {
     const user = yield call(performReq, url, {
