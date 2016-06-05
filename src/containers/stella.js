@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Login from '../components/login';
 import Home from '../components/home';
 import Polls from '../components/polls';
+import Lists from '../components/lists/lists.js';
 import Navbar from '../components/navbar';
 import _ from 'lodash';
 import { setRoute } from '../actions';
@@ -14,7 +15,8 @@ import { setRoute } from '../actions';
 const routes = {
   login: Login,
   home: Home,
-  polls: Polls
+  polls: Polls,
+  lists: Lists
 };
 
 const routesToHideNavBarFor = ['login'];
