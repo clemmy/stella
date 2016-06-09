@@ -34,7 +34,10 @@ class Home extends Component {
   }
 
   goToLists(event) {
-    console.log(event)
+    this.props.navigator.push({
+      name: 'lists'
+    });
+    this.dispatch(setRoute('lists'));
   }
 
   goToEvents(event) {
